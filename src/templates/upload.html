@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Subir libro{% endblock %}
+{% block content %}
+  <h1>Subir libro</h1>
+  <form method="post" enctype="multipart/form-data">
+    <div>{{ form.title.label }} {{ form.title() }}</div>
+    <div>{{ form.author.label }} {{ form.author() }}</div>
+    <div>
+      <label for="cover">Portada</label> <input id="cover" name="cover" required="" type="file" accept="image/*, application/pdf">
+    </div>
+    <div>{{ form.submit() }}</div>
+  </form>
+{% endblock %}

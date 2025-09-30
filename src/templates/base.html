@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>{% block title %}Flask Books{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <nav>
+{% if current_user.is_authenticated %}
+          <a href="{{ url_for('index') }}">Inicio</a> |
+          <a href="{{ url_for('upload') }}">Subir libro</a> |
+          <a href="{{ url_for('search') }}">Buscar</a> ||
+          <b>{{ current_user.username }}</b>
+          <a href="{{ url_for('logout') }}">Salir</a>
+{% else %}
+          <a href="{{ url_for('login') }}">Entrar</a> |
+          <a href="{{ url_for('register') }}">Registrar</a>
+{% endif %}
+      </nav>
+    </header>
+    <main>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for category, msg in messages %}
+      <li class="{% if category == 'error' %}bg-red{% elif category == 'warning' %}bg-yellow{% elif category == 'success' %}bg-green{% else %}bg-gray{% endif %}">{{ msg }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+    </main>
+    <script>
+      document.querySelectorAll('.cover').forEach(async img => img.src = await (await fetch(`/cover?path=${img.id}`)).text())
+    </script>
+  </body>
+</html>

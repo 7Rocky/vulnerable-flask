@@ -1,0 +1,30 @@
+.flashes {
+  list-style: none;
+  padding: 0;
+}
+
+.flashes li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Categories */
+.bg-red {
+  background-color: #e74c3c;  /* error */
+}
+
+.bg-yellow {
+  background-color: #f1c40f;  /* warning */
+  color: #000;                /* better contrast on yellow */
+}
+
+.bg-green {
+  background-color: #2ecc71;  /* success */
+}
+
+.bg-gray {
+  background-color: #7f8c8d;  /* default */
+}

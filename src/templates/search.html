@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Buscar{% endblock %}
+{% block content %}
+<h1>Buscar libros</h1>
+<form method="get" action="{{ url_for('search') }}">
+  <input name="q" placeholder="Título..." value="{{ q | e }}">
+  <button type="submit">Buscar</button>
+</form>
+  {% if results %}
+  <h2>Resultados</h2>
+  <ul>
+    {% for r in results %}
+    <li>
+      <img class="cover" id="{{ r.cover }}" width="200px">
+      {{ r.title }} - {{ r.author }} | <a href="{{ url_for('delete', book_id=r.book_id) }}">Eliminar</a>
+      <br><br>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}
